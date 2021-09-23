@@ -5,6 +5,8 @@ import Signup from "./signup/Signup";
 import Profile from "./profile/Profile";
 import Chat from "./chat/Chat";
 import "./App.css";
+import VerifyEmail from "./email-verification/VerifyEmail";
+import Settings from "./settings/Settings";
 
 export const AppContext = React.createContext();
 const App = (props) => {
@@ -23,6 +25,17 @@ const App = (props) => {
                         path="/signup"
                         render={(props) => <Signup {...props} />}
                     />
+                    <Route
+                        exact
+                        path="/verify/email/:token"
+                        render={props => <VerifyEmail {...props}/>}
+                    />
+                    <Route
+                        exact
+                        path="/settings"
+                        render={props => <Settings {...props} />}
+                    />
+
                     <Route exact path="/" render={(props) => <Chat {...props} />}/>
                 </Switch>
             </BrowserRouter>

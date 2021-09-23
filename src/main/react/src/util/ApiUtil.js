@@ -121,3 +121,16 @@ export function findChatMessage(id) {
         method: "GET",
     });
 }
+
+export const verifyEmail = token => {
+    return request({
+        url: `${GATEWAY}/verify/email/${token}`,
+        method: "DELETE"
+    });
+}
+
+export const updateUser = user => request({
+    url: `${GATEWAY}/user/update-summary`,
+    method: "PUT",
+    body: JSON.stringify(user),
+});

@@ -143,6 +143,9 @@ const Chat = (props) => {
     const goToProfile = () => {
         props.history.push("/profile");
     }
+    const goToSettings = () => {
+        props.history.push("/settings");
+    }
 
     return (
         <div id="frame">
@@ -215,7 +218,7 @@ const Chat = (props) => {
                         {" "}
                         <span>Profile</span>
                     </button>
-                    <button id="settings">
+                    <button id="settings" onClick={goToSettings}>
                         <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
                         {" "}
                         <span>Settings</span>
