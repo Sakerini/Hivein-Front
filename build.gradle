@@ -33,7 +33,7 @@ test {
 }
 
 node {
-    version "16.10.0"
+    version = "16.10.0"
     download = true
     // Set the working directory for unpacking node
     workDir = file("${project.projectDir}/src/main/react/nodejs")
