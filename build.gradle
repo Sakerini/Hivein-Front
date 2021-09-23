@@ -32,6 +32,10 @@ test {
     useJUnitPlatform()
 }
 
+jar {
+    enabled = false
+}
+
 node {
     version = "16.10.0"
     download = true
