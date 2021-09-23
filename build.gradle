@@ -1,0 +1,77 @@
+plugins {
+    id "com.moowork.node" version "1.3.1"
+    id 'org.springframework.boot' version '2.5.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.hivein'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+dependencies {
+    implementation "com.moowork.gradle:gradle-node-plugin:1.3.1"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+node {
+    version '12.14.1'
+
+    download = false
+    // Set the working directory for unpacking node
+    workDir = file("${project.projectDir}/src/main/react/nodejs")
+
+    // Set the work directory for npn
+    npmWorkDir = file("${project.projectDir}/src/main/react/npm")
+
+    // Set the work directory where the node modules should be located
+    npmWorkDir = file("${project.projectDir}/src/main/react")
+}
+
+task npmInstallDependencies(type: NpmTask) {
+    dependsOn 'npmSetup'
+    execOverrides {
+        it.workingDir = 'src/main/react'
+    }
+    args = ['install']
+}
+
+task npmBuild(type: NpmTask) {
+    dependsOn 'npmInstallDependencies'
+    execOverrides {
+        it.workingDir = 'src/main/react'
+    }
+    args = ['run', 'build']
+}
+
+processResources {
+    dependsOn 'copyFrontendToBuild'
+}
+
+task copyFrontendToBuild(type: Copy) {
+    dependsOn 'npmBuild'
+    from "$projectDir/src/main/react/build"
+    into "$buildDir/resources/main/static"
+}

@@ -1,0 +1,12 @@
+@import "~antd/dist/antd.css";
+
+
+body {
+    background-image: url("background.jpeg");
+    background-size: cover;
+    background-color: #000000;
+}
+
+.App {
+    padding-top: 30px;
+}
