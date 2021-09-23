@@ -10,4 +10,9 @@ public class Controller {
         // Forward to home page so that route is preserved.(i.e forward:/intex.html)
         return "forward:/";
     }
+
+    @RequestMapping(value = "/verify/email/{token}")
+    public String redirectVerify() {
+        return "forward:/";
+    }
 }
