@@ -64,8 +64,8 @@ const Chat = (props) => {
 
     const connect = () => {
         const Stomp = require("stompjs");
-        var SockJS = require("sockjs-client");
-        SockJS = new SockJS("http://hivein-chatservice.herokuapp.com/ws");
+        let SockJS = require("sockjs-client");
+        SockJS = new SockJS("https://hivein-chatservice.herokuapp.com/ws");
         stompClient = Stomp.over(SockJS);
         stompClient.connect({}, onConnected, onError);
     };

@@ -1,6 +1,6 @@
 import jwt_decode from 'jwt-decode';
 
-const GATEWAY = "http://hivein-gateway.herokuapp.com";
+const GATEWAY = "https://hivein-gateway.herokuapp.com";
 
 const request = (options) => {
     const headers = new Headers();
